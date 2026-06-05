@@ -18,14 +18,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import ec.edu.puce.githubclient.models.GithubUser
+import ec.edu.puce.githubclient.models.Repository
 
 @Composable
-fun RepoItem(
-    name: String,
-    description: String?,
-    avatarUrl: String,
-    language: String? = null
-) {
+fun RepoItem(repository: Repository) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -37,7 +34,7 @@ fun RepoItem(
                 .padding(all = 16.dp)
         ) {
             AsyncImage(
-                model = avatarUrl,
+                model = repository.owner.avatarUrl,
                 contentDescription = "Imagen de repositorio",
                 modifier = Modifier.size(60.dp),
                 contentScale = ContentScale.Crop
@@ -45,14 +42,14 @@ fun RepoItem(
             Spacer(modifier = Modifier.width(16.dp))
             Column {
                 Text(
-                    text = name,
+                    text = repository.name,
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold
                 )
-                if (!description.isNullOrBlank()) {
+                if (!repository.description.isNullOrBlank()) {
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
-                        text = description,
+                        text = repository.description,
                         style = MaterialTheme.typography.bodyMedium,
                     )
                 }
@@ -63,11 +60,17 @@ fun RepoItem(
 
 @Preview(showBackground = true)
 @Composable
-fun RepoItemPreview() {
-    RepoItem(
-        name = "Repositorio de Android",
-        description = "Repositorio creado en Kotlin",
-        avatarUrl = "https://example.com/image.png",
-        language = "Kotlin"
+fun RepoItemPreview () {
+    val repository = Repository(
+        id = "98765",
+        name = "slimming-gym-management",
+        description = "Sistema de gestión para Slimming Gym",
+        language = "Kotlin",
+        owner = GithubUser(
+            id = "007",
+            login = "kferazo",
+            avatarUrl = "https://github.com/kferazo.png"
+        )
     )
+    RepoItem(repository)
 }
