@@ -23,7 +23,7 @@ class RepoListViewModel : ViewModel() {
         fetchRepos()
     }
 
-    private fun fetchRepos() {
+    fun fetchRepos() {
         viewModelScope.launch {
             _isLoading.value = true
             _errorMsg.value = null

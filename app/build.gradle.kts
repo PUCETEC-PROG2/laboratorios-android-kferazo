@@ -26,7 +26,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "GITHUB_TOKEN", localProperties.getProperty("GITHUB_TOKEN") ?: "\"\"")
+        buildConfigField("String", "GITHUB_TOKEN", "\"${localProperties.getProperty("GITHUB_TOKEN") ?: ""}\"")
     }
 
     buildTypes {

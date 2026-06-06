@@ -20,6 +20,8 @@ object RetrofitClient {
         .addInterceptor { chain ->
             val request = chain.request().newBuilder()
                 .addHeader("Authorization", "Bearer $MI_TOKEN")
+                .addHeader("Accept", "application/vnd.github+json")
+                .addHeader("User-Agent", "Github-Client-App")
                 .build()
             chain.proceed(request)
         }
